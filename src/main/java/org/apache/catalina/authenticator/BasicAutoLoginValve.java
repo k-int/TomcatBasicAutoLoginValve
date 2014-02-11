@@ -17,6 +17,8 @@ import org.apache.catalina.Valve;
 import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
 import org.apache.catalina.valves.ValveBase;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /*
  * Allows auto login in tomcat so we can bypass the BASIC authentication,
@@ -45,6 +47,8 @@ import org.apache.catalina.valves.ValveBase;
  * 		4. the password in server.xml is not set and the request parameter __password__ is not set
  */
 public class BasicAutoLoginValve extends ValveBase {
+	// Failed miserably to find out where containerLog output went, so have used the tried and trusted logging ...
+	static private Log log = LogFactory.getLog(BasicAutoLoginValve.class);
 	static private final String PARAMETER_AUTOLOGIN = "__autologin__";
 	static private final String PARAMETER_PASSWORD = "__password__";
 	static private final String PARAMETER_USERID = "__userid__";
@@ -92,10 +96,10 @@ public class BasicAutoLoginValve extends ValveBase {
 	        final boolean isTrustedIp = isTrusted(request, remoteAddr) || isTrusted(request, forwarded);
 	        if (loggingEnabled) {
 		        dumpHeaders(request);
-		        containerLog.debug("remoteAddr: " + remoteAddr);
-		        containerLog.debug("forwarded-for: " + forwarded);
-		        containerLog.debug("trusted ip: " + trustedAddresses.toString());
-		        containerLog.debug("isTrustedIp: " + isTrustedIp);
+		        log.info("remoteAddr: " + remoteAddr);
+		        log.info("forwarded-for: " + forwarded);
+		        log.info("trusted ip: " + trustedAddresses.toString());
+		        log.info("isTrustedIp: " + isTrustedIp);
 	        }
 	        
 	        if (isTrustedIp) {
@@ -163,7 +167,7 @@ public class BasicAutoLoginValve extends ValveBase {
     		}
     	}
     	if (name != null) {
-    		containerLog.debug(name + ": " + list.toString());
+    		log.info(name + ": " + list.toString());
     	}
     }
  
@@ -173,27 +177,27 @@ public class BasicAutoLoginValve extends ValveBase {
  
     public void setUserId(final String userId) {
     	if ((userId != null) && !userId.isEmpty()) {
-    		containerLog.debug("setUserId: " + userId);
+    		log.info("setUserId: " + userId);
 	        this.userId = userId;
     	}
     }
  
     public void setPassword(final String password) {
     	if ((password != null) && !password.isEmpty()) {
-    		containerLog.debug("setPassword: " + password);
+    		log.info("setPassword: " + password);
     		this.password = password;
     	}
     }
     
     public void setLoggingEnabled(final Boolean loggingEnabled) {
     	if (loggingEnabled != null) {
-    		containerLog.debug("setLoggingEnabled: " + loggingEnabled);
+    		log.info("setLoggingEnabled: " + loggingEnabled);
     		this.loggingEnabled = loggingEnabled;
     	}
     }
 
     private void dumpHeaders(Request r) {
-    	containerLog.debug("All headers:");
+    	log.info("All headers:");
 
         @SuppressWarnings("rawtypes")
 		Enumeration en = r.getHeaderNames();
@@ -201,7 +205,7 @@ public class BasicAutoLoginValve extends ValveBase {
         while (en.hasMoreElements()) {
             String name = (String)en.nextElement();
             String value = r.getHeader(name);
-            containerLog.debug(name + " = \"" + value + "\"");
+            log.info(name + " = \"" + value + "\"");
         }
     }
 }
