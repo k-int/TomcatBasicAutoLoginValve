@@ -4,13 +4,14 @@
 
     <groupId>com.k-int.tomcat</groupId>
     <artifactId>TomcatBasicAutoLoginValve</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 	
 	<scm>
 		<connection>scm:git:git://github.com/k-int/TomcatBasicAutoLoginValve.git</connection>
 		<developerConnection>scm:git:https://github.com/k-int/TomcatBasicAutoLoginValve.git</developerConnection>
 		<url>https://github.com/k-int/TomcatBasicAutoLoginValve</url>
-	</scm>
+	  <tag>TomcatBasicAutoLoginValve-1.0</tag>
+  </scm>
 
 	<repositories>
 		<repository>
