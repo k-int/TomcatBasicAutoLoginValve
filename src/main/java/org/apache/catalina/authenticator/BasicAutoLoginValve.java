@@ -30,7 +30,7 @@ import org.apache.catalina.valves.ValveBase;
  *   	  userId="xyz"
  *   	  password="abc"
  *   	  loggingEnabled="false"/>
- * trustedAddresses and roles can be a semi-colon list of values
+ * trustedAddresses can be a semi-colon list of values
  * trustedAddresses only needs to be the start of the address, so if you want all addresses that begin with 192.168.1 to be trusted then you only need to set trustedAddresses to "192.168.1"
  * 
  * In addition the following request parameters can be specified
