@@ -25,7 +25,7 @@ import org.apache.catalina.valves.ValveBase;
  * Based on the code at http://code.google.com/p/jugile-web2/source/browse/trunk/src/org/jugile/tomcat/AutoLoginValve.java?r=2
  * 
  * Entry in server.xml will look something like  
- * <Valve className="com.k_int.tomcat.AutoLoginValve" 
+ * <Valve className="org.apache.catalina.authenticator.BasicAutoLoginValve" 
  *   	  trustedAddresses="127.0.0.1"
  *   	  userId="xyz"
  *   	  password="abc"
